@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_flask
+    ports:
+      - "80:8080"
+    volumes:
+      - ./src:/src
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: flask
+    command: bash -c "gunicorn -w 1 -b 0.0.0.0:8000 app:app"
+    volumes:
+      - ./src:/src
+    expose:
+      - "8000"
+
