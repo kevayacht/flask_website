@@ -1,6 +1,10 @@
 from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
+from flask_wtf import CsrfProtect
 
 app = Flask(__name__)
+Bootstrap(app)
+CsrfProtect(app)
 
 
 @app.route('/')
