@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <link href="/static/css/styles.css" rel="stylesheet" media="screen">
+<link href="/static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet" media="screen">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Flask Landing</title>
+    <script src="/static/jquery-3.4.1.min.js"></script>
+    <script src="/static/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 </head>
 <body>
-<h1>Flask Landing Page</h1>
-<h1>Web -> [Nginx]Docker -> [Gunicorn -> Flask]Docker</h1>
+
+<div class="floating-block">
+
+    <div class="tabbable form-signin" id="tabs">
+
+        <ul class="nav nav-tabs">
+            <li><a href="#login-pane" data-toggle="tab">Login</a></li>
+            <li><a href="#register-pane" data-toggle="tab">Register</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="login-pane" class="tab-pane">
+                <form action="/login/" method="post" class="form-signin">
+                    {% if login_err %}
+                        <div class="form-group has-error">
+                            <label class="control-label"></label>
+                        </div>
+                    {% elif reg_success %}
+                        <div class="form-group has-success">
+                            <label class="control-label"></label>
+                        </div>
+                    {% endif %}
+
+                    <input type="text" name="username" id="username" class="form-control top-field" placeholder="Email Address" autofocus autocapitalize="none">
+                    <input type="password" name="password" id="password" class="form-control bottom-field" placeholder="Password">
+
+                    <button class="btn btn-large btn-primary btn-block" type="submit" name="submit" value="Login">Login</button>
+                </form>
+            </div>
+
+            <div id="register-pane" class="tab-pane">
+                <form action="/register/" method="post" class="form-signin">
+                    {% if reg_err %}
+                        <div class="form-group has-error">
+                            <label class="control-label" id="registerError"></label>
+                        </div>
+                    {% endif %}
+                    <input type="email" name="email" class="form-control alone-field" placeholder="Email Address" value="{{ email }}">
+                    <input type="password" name="password" class="form-control top-field" placeholder="Password">
+                    <input type="password" name="password_retype" class="form-control bottom-field" placeholder="Retype Password">
+                    <input type="tel" name="cell_no" id="cell_no" class="form-control alone-field" placeholder="Cellphone Number" value="{{ cell_no }}">
+                    <button class="btn btn-large btn-primary btn-block" type="submit" name="submit" value="Register">Register</button>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
 </body>
 </html>
