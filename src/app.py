@@ -1,15 +1,15 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
-from flask_wtf import CsrfProtect
+from flask_wtf import CSRFProtect
 
 app = Flask(__name__)
 Bootstrap(app)
-CsrfProtect(app)
+CSRFProtect(app)
 
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html',title='Home')
 
 
 @app.route('/<string:page_name>/')
